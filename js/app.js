@@ -89,7 +89,7 @@ form.addEventListener('submit', (e) => {
                 "//cdn.wheatherapi.com/weather/64x64/".length);
 
 
-                icon.src = "../icons/" + iconId;
+                icon.src = "https://maksymusprime.github.io/B.B.B-WeatherApplication//icons/" + iconId;
 
            
                 
@@ -109,7 +109,7 @@ form.addEventListener('submit', (e) => {
 
             if(code == 1000) {
 
-                app.style.backgroundImage = `url(../img/${timeOfTheDay}/clear.jpg)`;
+                app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/clear.jpg)`;
 
                 btn.style.background = "#CACFAB"
                 if(timeOfTheDay == "night") {
@@ -128,7 +128,7 @@ form.addEventListener('submit', (e) => {
                 code == 1279 ||
                 code == 1282 
             ) {
-                app.style.backgroundImage = `url(../img/${timeOfTheDay}/cloudy.jpg)`;
+                app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/cloudy.jpg)`;
                 btn.style.background = "#fa6d1b"
                 if(timeOfTheDay == "night") {
                     btn.style.background = "#181e27"
@@ -153,7 +153,7 @@ form.addEventListener('submit', (e) => {
                     code == 1249 ||
                     code == 1252 
                 ) {
-                    app.style.backgroundImage = `url(../img/${timeOfTheDay}/rainy.jpg)`;
+                    app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/rainy.jpg)`;
                     btn.style.background = "#647d75"
                     if(timeOfTheDay == "night") {
                         btn.style.background = "#325c80"
@@ -161,7 +161,7 @@ form.addEventListener('submit', (e) => {
 
                 }else {
 
-                    app.style.backgroundImage = `url(./img/${timeOfTheDay}/snowy.jpg)`;
+                    app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/snowy.jpg)`;
                     btn.style.background = "#4d72aa"
                     if(timeOfTheDay == "night") {
                         btn.style.background = "#1b1b1b"
