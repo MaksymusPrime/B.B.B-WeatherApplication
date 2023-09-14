@@ -15,60 +15,60 @@ const cities = document.querySelectorAll('.city');
 
 let cityInput = "London";
 
-
-
 cities.forEach((city) => {
-    city.addEventListener ('click', (e) => {
+    city.addEventListener('click', (e) => {
         cityInput = e.target.innerHTML;
 
         fetchWeatherData();
 
         app.style.opacity = "0";
-    
-        
+
     });
 })
 
-
 form.addEventListener('submit', (e) => {
-    if(search.value.length == 0) {
+    if (search.value.length == 0) {
         alert('Please type in a city name');
     } else {
 
         cityInput = search.value;
 
-
         fetchWeatherData();
 
         search.value = "";
         app.style.opacity = "0";
-       
+
     }
 
     e.preventDefault();
-    });
+});
 
- 
-    function dayOfTheWeek(day, month, year) {
+function dayOfTheWeek(day, month, year) {
 
-        const weekday = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    
-        var d = new Date(day, month, year)
-    
-        var dayName = weekday[d.getDay()]; 
-    
-        return dayName;
-    
-    }
+    const weekday = [
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+        'Sunday'
+    ];
 
-    function fetchWeatherData () {
-        fetch(`https://api.weatherapi.com/v1/current.json?key=941978d39c5649909fe211501232603&q=${cityInput}`)
+    var d = new Date(day, month, year)
 
+    var dayName = weekday[d.getDay()];
+
+    return dayName;
+
+}
+
+function fetchWeatherData() {
+    fetch(`https://api.weatherapi.com/v1/current.json?key=941978d39c5649909fe211501232603&q=${cityInput}`)
         .then(response => response.json())
         .then(data => {
 
             console.log(data);
-
 
             temp.innerHTML = data.current.temp_c + "&#176;";
             conditionOutput.innerHTML = data.current.condition.text;
@@ -78,107 +78,72 @@ form.addEventListener('submit', (e) => {
             const d = parseInt(date.substr(8, 2));
             const m = parseInt(date.substr(5, 2));
             const time = date.substr(11);
-            
 
             dateOutput.innerHTML = `${dayOfTheWeek(d, m, y)} ${d}, ${m}, ${y}`;
             timeOutput.innerHTML = time;
 
             nameOutput.innerHTML = data.location.name;
 
-            const iconId = data.current.condition.icon.substr(
-                "//cdn.wheatherapi.com/weather/64x64/".length);
+            const iconId = data
+                .current
+                .condition
+                .icon
+                .substr("//cdn.wheatherapi.com/weather/64x64/".length);
 
+            icon.src = "https://maksymusprime.github.io/B.B.B-WeatherApplication//icons/" + iconId;
 
-                icon.src = "https://maksymusprime.github.io/B.B.B-WeatherApplication//icons/" + iconId;
-
-           
-                
-            cloudOutput.innerHTML = data.current.cloud + "%";    
-            humidityOutput.innerHTML = data.current.humidity + "%";    
-            windOutput.innerHTML = data.current.wind_kph + "km/h";    
-
+            cloudOutput.innerHTML = data.current.cloud + "%";
+            humidityOutput.innerHTML = data.current.humidity + "%";
+            windOutput.innerHTML = data.current.wind_kph + "km/h";
 
             let timeOfTheDay = "day";
 
             const code = data.current.condition.code;
 
-            if(!data.current.is_day) {
+            if (!data.current.is_day) {
                 timeOfTheDay = "night";
 
             }
 
-            if(code == 1000) {
+            if (code == 1000) {
 
                 app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/clear.jpg)`;
 
                 btn.style.background = "#CACFAB"
-                if(timeOfTheDay == "night") {
+                if (timeOfTheDay == "night") {
                     btn.style.background = "#181e27"
                 }
-            }else if (
-                code == 1003 ||
-                code == 1006 ||
-                code == 1009 ||
-                code == 1030 ||
-                code == 1069 ||
-                code == 1087 ||
-                code == 1135 ||
-                code == 1273 ||
-                code == 1276 ||
-                code == 1279 ||
-                code == 1282 
-            ) {
+            } else if (code == 1003 || code == 1006 || code == 1009 || code == 1030 || code == 1069 || code == 1087 || code == 1135 || code == 1273 || code == 1276 || code == 1279 || code == 1282) {
                 app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/cloudy.jpg)`;
                 btn.style.background = "#fa6d1b"
-                if(timeOfTheDay == "night") {
+                if (timeOfTheDay == "night") {
                     btn.style.background = "#181e27"
                 }
-            }else if (
-                    code == 1063 ||
-                    code == 1069 ||
-                    code == 1072 ||
-                    code == 1150 ||
-                    code == 1153 ||
-                    code == 1180 ||
-                    code == 1183 ||
-                    code == 1186 ||
-                    code == 1189 ||
-                    code == 1192 ||
-                    code == 1195 ||
-                    code == 1204 ||
-                    code == 1207 ||
-                    code == 1240 ||
-                    code == 1243 ||
-                    code == 1246 ||
-                    code == 1249 ||
-                    code == 1252 
-                ) {
-                    app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/rainy.jpg)`;
-                    btn.style.background = "#647d75"
-                    if(timeOfTheDay == "night") {
-                        btn.style.background = "#325c80"
-                    }
+            } else if (code == 1063 || code == 1069 || code == 1072 || code == 1150 || code == 1153 || code == 1180 || code == 1183 || code == 1186 || code == 1189 || code == 1192 || code == 1195 || code == 1204 || code == 1207 || code == 1240 || code == 1243 || code == 1246 || code == 1249 || code == 1252) {
+                app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/rainy.jpg)`;
+                btn.style.background = "#647d75"
+                if (timeOfTheDay == "night") {
+                    btn.style.background = "#325c80"
+                }
 
-                }else {
+            } else {
 
-                    app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/snowy.jpg)`;
-                    btn.style.background = "#4d72aa"
-                    if(timeOfTheDay == "night") {
-                        btn.style.background = "#1b1b1b"
-                    }
-                  }
+                app.style.backgroundImage = `url(https://maksymusprime.github.io/B.B.B-WeatherApplication/img/${timeOfTheDay}/snowy.jpg)`;
+                btn.style.background = "#4d72aa"
+                if (timeOfTheDay == "night") {
+                    btn.style.background = "#1b1b1b"
+                }
+            }
 
-                  app.style.opacity = "1";
-    })
-
-    .catch(() => {
-        alert ('City not found,  please try again');
-        app.style.opacity = "1";
-    });
+            app.style.opacity = "1";
+        })
+        .catch(() => {
+            alert('City not found,  please try again');
+            app.style.opacity = "1";
+        });
 
 }
 
 fetchWeatherData();
-
 
 app.style.opacity = "1";
